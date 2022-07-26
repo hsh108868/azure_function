@@ -18,7 +18,7 @@ jobs:
       shell: pwsh
 
       run: |
-        echo "STEP_2 = 'Lorem Ipsum from Step 2'" | Out-File - FilePath >> $GITHUB_ENV -Encoding utf-8 -Append
+        echo "STEP_2 = 'Lorem Ipsum from Step 2'" | Out-File -FilePath >> $GITHUB_ENV -Encoding utf-8 -Append
     - name: 'Get environment variables'
       shell: bash
       run: |
