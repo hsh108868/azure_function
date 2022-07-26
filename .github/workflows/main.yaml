@@ -13,8 +13,8 @@ jobs:
     - name: 'Set environment variable 1' # 네임 하나가 각각의 스텝
       shell: bash
       run: |
-        echo $GITHUB_ENV
-        echo "STEP_1 = 'This value comes from the step 1'" >> $GITHUB_ENV
+        value1 = 'hello world'
+        echo "STEP_1 = '$value1'" >> $GITHUB_ENV
     - name: 'Set environment variable 2'
       shell: pwsh
 
