@@ -27,7 +27,7 @@ jobs:
         echo "::set-output name=value2::$STEP_2"
 
     - name: 'Get output values'
-      shell: bash
+      shell: pwsh
       run: |
         echo "STEP 1: ${{ steps.step1.outputs.value1 }}"
         echo "STEP 2: ${{ steps.step2.outputs.value2 }}"
