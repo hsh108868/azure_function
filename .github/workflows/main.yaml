@@ -2,7 +2,7 @@ name: 'My First GitHub Actions Workflow' # 워크플로우 이름
 on: push #코드가 github으로 push 됐을 때 작동 == 트리거이벤트
 
 env:
-  WROKFLOW_LEVEL: 'This values comes from the workflow level' #jobs에서도 가능, 각각의 steps에서도 환경변수 설정 가능
+  WORKFLOW_LEVEL: 'This values comes from the workflow level' #jobs에서도 가능, 각각의 steps에서도 환경변수 설정 가능
 
 jobs: 
   first-job: 
