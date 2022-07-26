@@ -1,0 +1,16 @@
+name: 'My First GitHub Actions Workflow' # 워크플로우 이름
+on: push #코드가 github으로 push 됐을 때 작동 == 트리거이벤트
+jobs: 
+  first-job: 
+    name: 'First Job' #하는 일 각각의 빌드 서버가 할당된다.
+    runs-on: ubuntu-latest #빌드 서버의 운영 체제, 여러 개 사용 가능
+    steps:
+    - name: 'Say Hello World on step 1' # 네임 하나가 각각의 스텝
+      shell: bash
+      run: |
+        echo "Hello World from Step 1"
+    - name: 'Say Lorem Ipsum on step 2'
+      shell: pwsh
+      run: |
+        echo "Lorem Ipsum from Step 2"
+  
