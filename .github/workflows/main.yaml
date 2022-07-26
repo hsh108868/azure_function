@@ -13,7 +13,7 @@ jobs:
     - name: 'Set output value 1' # 네임 하나가 각각의 스텝
       id: step1
       shell: bash
-      run: |
+      run: | #마스킹을 통해 민감한 정보를 가릴 수 있다. github settings에서 secret을 정할수잇음
         STEP_1='This value comes from the step 1'
         echo "::add-mask::$STEP_1"
         echo "::set-output name=value1::$STEP_1"
@@ -31,3 +31,4 @@ jobs:
       run: |
         echo "STEP 1: ${{ steps.step1.outputs.value1 }}"
         echo "STEP 2: ${{ steps.step2.outputs.value2 }}"
+        ehco "SECRET 1: ${{ secrets.SECRET_1 }}"
