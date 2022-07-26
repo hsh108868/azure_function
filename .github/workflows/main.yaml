@@ -5,36 +5,39 @@ env:
   WORKFLOW_LEVEL: 'This values comes from the workflow level' #jobs에서도 가능, 각각의 steps에서도 환경변수 설정 가능
 
 jobs: 
-  first-job: 
-    if: github.event_name == 'pull_request'
-    name: 'First Job' #하는 일 각각의 빌드 서버가 할당된다.
-
-    strategy:
-      matrix:
-        os: ['ubuntu-latest', 'windows-latest','macos-latest']
-        nodejs: ['14.x', '16.x']
-    runs-on: ${{ matrix.os }} #빌드 서버의 운영 체제, 여러 개 사용 가능
+  build-job: 
+    name: 'Build Job' #하는 일 각각의 빌드 서버가 할당된다.
+    runs-on: ubuntu-latest
 
     steps:
-    - name: 'Setup node.js version' # 네임 하나가 각각의 스텝
-      uses: actions/setup-node@v3
-      with:
-        node-version: ${{ matrix.nodejs }}
+    - name: 'Say Hello' # 네임 하나가 각각의 스텝
+      shell: bash
+      run: |
+        echo "Hello World"
 
-    - name: 'Run only on Windows'
-      if: matrix.os == 'windows-latest'
-      shell: bash
-      run: |
-        echo "Windows Only"
+  deploy-to-dev-job: 
+    name: 'Deployment Job to DEV' #하는 일 각각의 빌드 서버가 할당된다.
+    needs:
+      - build-job
+    runs-on: ubuntu-latest
 
-    - name: 'Run not on Windows'
-      if: matrix.os != 'windows-latest'
+    steps:
+    - name: 'Say DEV' # 네임 하나가 각각의 스텝
       shell: bash
       run: |
-        echo "Not Windows"
-    
-    - name: 'Check node.js version on ${{ matrix.os }} '
+        echo "DEVELOPERS"
+
+
+  deploy-to-prod-job: 
+    name: 'Deployment Job to PROD' #하는 일 각각의 빌드 서버가 할당된다.
+    needs:
+      - build-job
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: 'Say PRO' # 네임 하나가 각각의 스텝
       shell: bash
       run: |
-        echo $(node --version)
+        echo "PRODUCER"
+
 
