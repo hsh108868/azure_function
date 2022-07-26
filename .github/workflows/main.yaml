@@ -6,6 +6,7 @@ env:
 
 jobs: 
   first-job: 
+    if: github.event_name == 'pull_request'
     name: 'First Job' #하는 일 각각의 빌드 서버가 할당된다.
 
     strategy:
