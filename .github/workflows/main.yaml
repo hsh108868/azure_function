@@ -11,10 +11,17 @@ jobs:
     strategy:
       matrix:
         os: ['ubuntu-latest', 'windows-latest','macos-latest']
+        nodejs: ['14.x', '16.x']
     runs-on: ${{ matrix.os }} #빌드 서버의 운영 체제, 여러 개 사용 가능
 
     steps:
-    - name: 'Say Hello on ${{ matrix.os }}' # 네임 하나가 각각의 스텝
+    - name: 'Setup node.js version' # 네임 하나가 각각의 스텝
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.nodejs }}
+    
+    - name: 'Check node.js version on ${{ matrix.os }} '
       shell: bash
-      run: | #마스킹을 통해 민감한 정보를 가릴 수 있다. github settings에서 secret을 정할수잇음
-        echo "Hello from ${{ matrix.os }}"
+      run: |
+        echo $(node --version)
+
